@@ -3,13 +3,15 @@ FROM golang:alpine AS builder
 
 WORKDIR /opt/Tresor
 
-COPY Tresor/go.mod ./
-COPY Tresor/go.sum ./
+COPY Tresor/server/go.mod ./
+COPY Tresor/server/go.sum ./
 RUN go mod download
 
-COPY Tresor/*.go ./
+# Zmiana ścieżki kopiowania plików źródłowych
+COPY Tresor/server/*.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o docker-Tresor-bin
+# Poprawka komendy budowania, aby uwzględnić poprawną ścieżkę
+RUN CGO_ENABLED=0 GOOS=linux go build -o docker-Tresor-bin .
 
 # Etap serwowania
 FROM alpine AS serve
