@@ -33,18 +33,9 @@ func main() {
 	config.AllowAllOrigins = true
 	router.Use(cors.New(config))
 
-	// these are the endpoints
-	//C
-	router.POST("/order/create", routes.AddOrder)
-	//R
-	router.GET("/waiter/:waiter", routes.GetOrdersByWaiter)
-	router.GET("/orders", routes.GetOrders)
-	router.GET("/order/:id/", routes.GetOrderById)
-	//U
-	router.PUT("/waiter/update/:id", routes.UpdateWaiter)
-	router.PUT("/order/update/:id", routes.UpdateOrder)
-	//D
-	router.DELETE("/order/delete/:id", routes.DeleteOrder)
+	// te są endpointy dla logowania i rejestracji
+	router.POST("/login", routes.LoginUser) // logowanie użytkownika
+	router.POST("/register", routes.RegisterUser) // rejestracja użytkownika
 
 	// this starts the server and allows it to listen for requests.
 	router.Run(":" + port)
