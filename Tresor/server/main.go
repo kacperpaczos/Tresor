@@ -34,8 +34,8 @@ func main() {
 	router.Use(cors.New(config))
 
 	// te są endpointy dla logowania i rejestracji
-	router.POST("/login", routes.LoginUser) // logowanie użytkownika
-	router.POST("/register", routes.RegisterUser) // rejestracja użytkownika
+	//router.POST("/login", routes.LoginUser) // logowanie użytkownika
+	//router.POST("/register", routes.RegisterUser) // rejestracja użytkownika
 
 	// this starts the server and allows it to listen for requests.
 	router.Run(":" + port)
