@@ -1,19 +1,19 @@
-# Etap budowania
+# Build stage
 FROM golang:alpine AS builder
 
 WORKDIR /opt/Tresor
 
-COPY Tresor/server/go.mod ./
-COPY Tresor/server/go.sum ./
+COPY server/go.mod ./
+COPY server/go.sum ./
 RUN go mod download
 
-# Zmiana ścieżki kopiowania plików źródłowych
-COPY Tresor/server/*.go ./
+# Change the path for copying source files
+COPY server/*.go ./
 
-# Poprawka komendy budowania, aby uwzględnić poprawną ścieżkę
+# Fix the build command to include the correct path
 RUN CGO_ENABLED=0 GOOS=linux go build -o docker-Tresor-bin .
 
-# Etap serwowania
+# Serving stage
 FROM alpine AS serve
 
 WORKDIR /opt/serve
@@ -25,7 +25,7 @@ EXPOSE 8443
 
 CMD [ "./docker-Tresor-bin" ]
 
-# Etap produkcyjny
+# Production stage
 FROM serve AS production
 
 WORKDIR /root/

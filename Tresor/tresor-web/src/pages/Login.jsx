@@ -40,7 +40,9 @@ const Login = () => {
 
   return (
     <LoginWrapper>
+      <h1>Dupa</h1>
       <h1>{t('loginForm')}</h1>
+
       <input type="text" placeholder={t('login')} value={login} onChange={(e) => setLogin(e.target.value)} />
       <input type="password" placeholder={t('password')} value={password} onChange={(e) => setPassword(e.target.value)} />
       <LoginButton onClick={handleLogin} disabled={loading}>{t('login')}</LoginButton>

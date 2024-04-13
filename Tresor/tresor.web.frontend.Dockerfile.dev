@@ -1,0 +1,10 @@
+# Development Phase
+FROM node:18 AS dev
+WORKDIR /app
+COPY ./tresor-web/package*.json ./
+RUN yarn install
+COPY ./tresor-web/ ./
+RUN yarn install --frozen-lockfile
+
+EXPOSE 3000
+CMD ["yarn", "dev"]

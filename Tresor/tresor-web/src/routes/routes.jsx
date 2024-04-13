@@ -1,17 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 
-const Routes = () => {
+function Routes() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        {/* Możesz dodać więcej ścieżek i komponentów tutaj */}
-      </Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Redirect to="/login" />}>
+          <Route index element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          {/* Możesz dodać więcej ścieżek i komponentów tutaj */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

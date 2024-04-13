@@ -1,27 +1,18 @@
-version: '3.8'
 services:
-  backend:
-    build:
-      context: ./Tresor
-      dockerfile: tresor.go.backend.Dockerfile
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./Tresor/server:/app
-    command: sh -c "go build -o main . && ./main"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
   frontend:
     build:
       context: ./Tresor
-      dockerfile: tresor.web.frontend.Dockerfile
+      dockerfile: tresor.web.frontend.Dockerfile.dev
       target: dev
     ports:
       - "3000:3000"
     volumes:
       - ./Tresor/tresor-web:/app
-    command: sh -c "yarn install && yarn dev"
+      - /app/node_modules
+    command: yarn dev
     environment:
       - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
 
 
